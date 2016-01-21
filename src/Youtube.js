@@ -293,8 +293,6 @@ THE SOFTWARE. */
     src: function(src) {
       if (src) {
         this.setSrc({ src: src });
-        
-        // this.play();
       }
 
       return this.source;
@@ -338,6 +336,11 @@ THE SOFTWARE. */
         } else {
           this.playOnReady = true;
         }
+      } else {
+        if (this.isReady_) {
+          // console.log(this.source)
+          this.ytPlayer.cueVideoById(this.url.videoId);
+        }
       }
     },
 
@@ -359,6 +362,7 @@ THE SOFTWARE. */
         if (this.activeVideoId === this.url.videoId) {
           this.ytPlayer.playVideo();
         } else {
+          // this line gets triggered
           this.ytPlayer.loadVideoById(this.url.videoId);
           this.activeVideoId = this.url.videoId;
         }
